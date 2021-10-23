@@ -84,7 +84,10 @@ img.medium {
     font-size: 2rem;
 }
 /* Rating */
-.rating i {
+.rating {
+    display: flex;
+}
+.rating span {
 color: #f0c040;
 margin: .1rem;
 }

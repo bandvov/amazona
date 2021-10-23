@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { products } from "./data";
+import Product from "./components/Product";
 
 export default function App() {
   return (
@@ -16,35 +17,14 @@ export default function App() {
           </div>
         </div>
       </header>
-
-      <div className="row center">
-        {products.map((product) => {
-          return (
-            <div className="card">
-              <a href={`/product/${product._id}`}>
-                <img
-                  className="medium"
-                  src={product.image}
-                  alt={product.name}
-                />
-              </a>
-              <div className="card-body">
-                <h2>
-                  <a href={`/product/${product._id}`}>{product.name}</a>
-                </h2>
-                <div className="rating">
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                  <i className="fa fa-star"></i>
-                </div>
-                <div className="price">${product.price}</div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+      <main>
+        <div className="row center">
+          {products.map((product) => {
+            return <Product key={product._id} product={product} />;
+          })}
+        </div>
+      </main>
+      <footer className="row center">&copy; All rights reserved</footer>
     </div>
   );
 }
