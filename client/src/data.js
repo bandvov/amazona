@@ -9,6 +9,7 @@ export const products = [
     price: 120,
     numberViews: 11,
     rating: 1,
+    countInStock: 0,
   },
   {
     _id: "2",
@@ -20,6 +21,7 @@ export const products = [
     price: 230,
     numberViews: 41,
     rating: 2,
+    countInStock: 2,
   },
   {
     _id: "3",
@@ -31,6 +33,7 @@ export const products = [
     price: 180,
     numberViews: 64,
     rating: 2.5,
+    countInStock: 12,
   },
   {
     _id: "4",
@@ -42,6 +45,7 @@ export const products = [
     price: 180,
     numberViews: 64,
     rating: 3,
+    countInStock: 26,
   },
   {
     _id: "5",
@@ -53,5 +57,6 @@ export const products = [
     price: 180,
     numberViews: 64,
     rating: 4.5,
+    countInStock: 5,
   },
 ];
