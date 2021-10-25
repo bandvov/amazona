@@ -126,3 +126,19 @@ margin: .1rem;
 .error {
     color: red;
 }
+.alert {
+    padding: 1rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+}
+.alert-info {
+    color: #2020a0;
+    background-color: #e0e0ff;
+}
+.alert-danger {
+    color: #a02020;
+    background-color: #ffe0e0;
+}
+.alert-success {
+    background-color: rgb(229, 255, 229);
+}

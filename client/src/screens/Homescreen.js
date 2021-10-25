@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Product from "../components/Product";
 import axios from "axios";
+import MessageBox from "../components/MessageBox";
 
 export default function Homescreen() {
   const [products, setProducts] = useState([]);
@@ -17,16 +18,15 @@ export default function Homescreen() {
       .catch((e) => {
         if (e) {
           setError(true);
+          setLoading(false);
         }
       });
   }, []);
 
-  if (error) {
-    return <div>Oops something went wrong</div>;
-  }
-
   return loading ? (
     "loading"
+  ) : error ? (
+    <MessageBox variant="danger">Oops something went wrong</MessageBox>
   ) : (
     <div className="row center">
       {products.map((product) => {
