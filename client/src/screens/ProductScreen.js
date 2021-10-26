@@ -1,11 +1,13 @@
 import React from "react";
-import { products } from "./../data";
 import Rating from "./../components/Rating";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function ProductScreen({ match }) {
-  const product = products.find((product) => {
-    return product._id === match.params.id;
+  const product = useSelector((state) => {
+    return state.product.products.find((item) => {
+      return item._id === match.params.id;
+    });
   });
 
   return (
