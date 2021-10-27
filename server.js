@@ -5,7 +5,11 @@ const PORT = 5000;
 const cors = require("cors");
 const path = require("path");
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(cors({ origin: "*" }));
+
 // app.use(express.static(path.join(__dirname, "/client/build")));
 // app.use(express.static("public"));
 
@@ -15,6 +19,18 @@ app.use(cors({ origin: "*" }));
 
 app.get("/api/products", (req, res) => {
   res.json({ products });
+});
+app.get("/api/product/:id", (req, res) => {
+  const { id } = req.params;
+  const product = products.find((product) => {
+    return product._id === id;
+  });
+
+  if (product) {
+    res.json({ product });
+  } else {
+    res.status(404).json({ message: "Product not found" });
+  }
 });
 app.listen(PORT, () => {
   console.log("server started on port: %s", PORT);

@@ -20,3 +20,17 @@ export const getProducts = (dispatch) => {
       dispatch(setLoading(false));
     });
 };
+
+export const getProduct = (dispatch, id) => {
+  dispatch(setLoading(true));
+  dispatch(setError(false));
+  axios
+    .get(`http://localhost:5000/api/product/${id}`)
+    .then((res) => {
+      dispatch(setProduct(res.data.product));
+    })
+    .catch((err) => {
+      dispatch(setError(true));
+      dispatch(setLoading(false));
+    });
+};

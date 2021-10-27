@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Rating from "./../components/Rating";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getProduct } from "../redux/customActions/productActions";
 
 export default function ProductScreen({ match }) {
-  const product = useSelector((state) => {
-    return state.product.products.find((item) => {
-      return item._id === match.params.id;
-    });
-  });
+  const dispatch = useDispatch();
+  useEffect(() => {
+    getProduct(dispatch, match.params.id);
+  }, []);
+  const product = useSelector((state) => state.product.product);
 
   return (
     <div className="row top">

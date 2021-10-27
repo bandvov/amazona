@@ -4,6 +4,7 @@ export const counterSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
+    product: {},
     loading: true,
     error: false,
   },
@@ -17,10 +18,14 @@ export const counterSlice = createSlice({
     setError: (state, action) => {
       state.error = action.payload;
     },
+    setProduct: (state, action) => {
+      state.product = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setProducts, setLoading, setError } = counterSlice.actions;
+export const { setProducts, setLoading, setError, setProduct } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;
