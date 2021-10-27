@@ -39,11 +39,16 @@ h1, h2 {
 h2 {
     font-size: 1.6rem;
 }
+input,
+select,
+textarea,
 button {
     padding: 1rem;
     border-radius: .5rem;
     border: .1rem #a4a4a4 solid;
     font-size: 1.6rem;
+}
+button {
     background-color: #f8f8f8;
     cursor: pointer; 
 }
@@ -71,6 +76,7 @@ a.brand {
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
+    margin-bottom: 1rem;
 }
 .row.center {
     justify-content: center;

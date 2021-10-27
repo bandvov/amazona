@@ -1,16 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Rating from "./../components/Rating";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../redux/customActions/productActions";
 
-export default function ProductScreen({ match }) {
-  const dispatch = useDispatch();
-  useEffect(() => {
-    getProduct(dispatch, match.params.id);
-  }, []);
-  const product = useSelector((state) => state.product.product);
+export default function ProductScreen({ match, history }) {
+  const [qty, setQty] = useState(1);
 
+  const dispatch = useDispatch();
+
+  const productId = match.params.id;
+
+  useEffect(() => {
+    getProduct(dispatch, productId);
+  }, []);
+
+  const product = useSelector((state) => state.product.product);
+  const addQuantity = () => {
+    history.push(`/cart/${productId}?qty=${qty}`);
+  };
   return (
     <div className="row top">
       <div className="col-2">
@@ -43,7 +51,25 @@ export default function ProductScreen({ match }) {
             )}
           </div>
           <div>
-            <button className="primary block">Add to Cart</button>
+            {product.countInStock && (
+              <>
+                <div className="row">
+                  <div>Qty</div>
+                  <select
+                    onChange={(e) => {
+                      setQty(e.target.value);
+                    }}
+                  >
+                    {[...Array(product.countInStock).keys()].map((x) => (
+                      <option value={x + 1}>{x + 1}</option>
+                    ))}
+                  </select>
+                </div>
+                <button onClick={addQuantity} className="primary block">
+                  Add to Cart
+                </button>
+              </>
+            )}
           </div>
         </div>
       </div>
