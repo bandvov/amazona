@@ -24,22 +24,33 @@ export const counterSlice = createSlice({
     },
     setAddToCart: (state, action) => {
       const item = action.payload;
-      const existInCartItems= state.cartItems.find(
+      const existInCartItems = state.cartItems.find(
         (x) => x.product === item.product
       );
       if (existInCartItems) {
-        state.cartItems = state.cartItems.map(x=>{
-         return x.product ===item.product ? item : x 
-        })
+        state.cartItems = state.cartItems.map((x) => {
+          return x.product === item.product ? item : x;
+        });
       } else {
         state.cartItems = [...state.cartItems, item];
       }
+      localStorage.getItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    setDefaultCartItems: (state) => {
+      console.log("here1");
+      state.cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setProducts, setLoading, setError, setProduct, setAddToCart } =
-  counterSlice.actions;
+export const {
+  setProducts,
+  setLoading,
+  setError,
+  setProduct,
+  setAddToCart,
+  setDefaultCartItems,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

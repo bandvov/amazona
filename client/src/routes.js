@@ -8,6 +8,7 @@ export default function Routes() {
       {ROUTES.map((route) => {
         return (
           <Route
+            key={route.path}
             exact={route.exact}
             path={route.path}
             component={route.component}

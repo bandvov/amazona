@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Rating from "./../components/Rating";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { addToCart, getProduct } from "../redux/customActions/productActions";
+import { getProduct } from "../redux/customActions/productActions";
 
 export default function ProductScreen({ match, history }) {
   const [qty, setQty] = useState(1);

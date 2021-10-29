@@ -4,6 +4,7 @@ import {
   setLoading,
   setProducts,
   setAddToCart,
+  setDefaultCartItems,
 } from "../reducers/productSlice";
 import axios from "axios";
 
@@ -48,4 +49,8 @@ export const addToCart = (dispatch, id, quontity) => {
     };
     dispatch(setAddToCart(itemToAdd));
   });
+};
+
+export const initCartItems = (dispatch) => {
+  dispatch(setDefaultCartItems);
 };

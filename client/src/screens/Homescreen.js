@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Product from "../components/Product";
 import MessageBox from "../components/MessageBox";
 import { getProducts } from "../redux/customActions/productActions";
@@ -9,7 +9,7 @@ export default function Homescreen() {
 
   useEffect(() => {
     getProducts(dispatch);
-  }, []);
+  }, [dispatch]);
 
   const products = useSelector((state) => state.product.products);
   const loading = useSelector((state) => state.product.loading);

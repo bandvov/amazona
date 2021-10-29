@@ -148,3 +148,13 @@ margin: .1rem;
 .alert-success {
     background-color: rgb(229, 255, 229);
 }
+
+.badge {
+    background-color: green;
+    border-radius: 10px;
+    padding: .5rem .7rem;
+    margin-right: 1rem;
+    font-size: 1rem;
+    min-width: 1rem;
+    color: white;
+}
