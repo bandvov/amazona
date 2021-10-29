@@ -7,6 +7,7 @@ export const counterSlice = createSlice({
     product: {},
     loading: true,
     error: false,
+    cartItems: [],
   },
   reducers: {
     setProducts: (state, action) => {
@@ -21,11 +22,24 @@ export const counterSlice = createSlice({
     setProduct: (state, action) => {
       state.product = action.payload;
     },
+    setAddToCart: (state, action) => {
+      const item = action.payload;
+      const existInCartItems= state.cartItems.find(
+        (x) => x.product === item.product
+      );
+      if (existInCartItems) {
+        state.cartItems = state.cartItems.map(x=>{
+         return x.product ===item.product ? item : x 
+        })
+      } else {
+        state.cartItems = [...state.cartItems, item];
+      }
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setProducts, setLoading, setError, setProduct } =
+export const { setProducts, setLoading, setError, setProduct, setAddToCart } =
   counterSlice.actions;
 
 export default counterSlice.reducer;

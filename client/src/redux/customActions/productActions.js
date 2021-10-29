@@ -3,6 +3,7 @@ import {
   setError,
   setLoading,
   setProducts,
+  setAddToCart,
 } from "../reducers/productSlice";
 import axios from "axios";
 
@@ -33,4 +34,18 @@ export const getProduct = (dispatch, id) => {
       dispatch(setError(true));
       dispatch(setLoading(false));
     });
+};
+
+export const addToCart = (dispatch, id, quontity) => {
+  axios.get(`http://localhost:5000/api/product/${id}`).then((res) => {
+    const { _id, name, price, countInStock } = res.data.product;
+    const itemToAdd = {
+      product: _id,
+      name,
+      price,
+      countInStock,
+      qty: quontity,
+    };
+    dispatch(setAddToCart(itemToAdd));
+  });
 };
