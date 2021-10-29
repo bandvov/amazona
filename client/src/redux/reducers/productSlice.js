@@ -34,7 +34,6 @@ export const counterSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item];
       }
-      localStorage.getItem("cartItems", JSON.stringify(state.cartItems));
     },
     setDefaultCartItems: (state) => {
       console.log("here1");

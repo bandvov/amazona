@@ -3,16 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/customActions/productActions";
 
 export default function CartScreen({ match, location }) {
-
   const productId = match.params.id;
   const qty = location.search.split("=")[1] || 1;
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.product.cartItems);
-  
   useEffect(() => {
     addToCart(dispatch, productId, qty);
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [dispatch, productId, qty, cartItems]);
+  }, [dispatch, productId, qty]);
 
   return <pre>cart</pre>;
 }
