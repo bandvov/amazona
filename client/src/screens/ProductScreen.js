@@ -3,6 +3,7 @@ import Rating from "./../components/Rating";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../redux/customActions/productActions";
+import QuantityDropdown from "../components/QuantityDropdown";
 
 export default function ProductScreen({ match, history }) {
   const [qty, setQty] = useState(1);
@@ -55,17 +56,12 @@ export default function ProductScreen({ match, history }) {
               <>
                 <div className="row">
                   <div>Qty</div>
-                  <select
+                  <QuantityDropdown
                     onChange={(e) => {
                       setQty(e.target.value);
                     }}
-                  >
-                    {[...Array(product.countInStock).keys()].map((x) => (
-                      <option key={x + 1} value={x + 1}>
-                        {x + 1}
-                      </option>
-                    ))}
-                  </select>
+                    optionItems={product.countInStock}
+                  />
                 </div>
                 <button onClick={addQuantity} className="primary block">
                   Add to Cart

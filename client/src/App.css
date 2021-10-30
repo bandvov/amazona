@@ -95,6 +95,10 @@ a.brand {
 img {
     border-radius: 1rem;
 }
+img.small {
+    max-width: 5rem;
+    width: 100%;
+}
 img.medium {
     max-width: 29rem;
     width: 100%;
@@ -157,4 +161,14 @@ margin: .1rem;
     font-size: 1rem;
     min-width: 1rem;
     color: white;
+}
+ul {
+    padding: 0;
+    list-style: none;
+}
+li {
+}
+.min-30 {
+    max-width: 30rem;
+    width: 100%;
 }

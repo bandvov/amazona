@@ -12,10 +12,9 @@ export default function App() {
 
   useEffect(() => {
     initCartItems(dispatch);
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
-    console.log('here2');
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 

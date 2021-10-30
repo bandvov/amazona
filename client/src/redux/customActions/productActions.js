@@ -39,13 +39,14 @@ export const getProduct = (dispatch, id) => {
 
 export const addToCart = (dispatch, id, quontity) => {
   axios.get(`http://localhost:5000/api/product/${id}`).then((res) => {
-    const { _id, name, price, countInStock } = res.data.product;
+    const { _id, name, price, countInStock, image } = res.data.product;
     const itemToAdd = {
       product: _id,
       name,
       price,
       countInStock,
       qty: quontity,
+      image,
     };
     dispatch(setAddToCart(itemToAdd));
   });
