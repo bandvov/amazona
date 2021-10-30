@@ -16,7 +16,7 @@ export default function App() {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }, [cartItems]);
+  });
 
   return (
     <div className="grid-container">

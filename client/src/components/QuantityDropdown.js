@@ -1,8 +1,13 @@
 import React from "react";
 
-export default function QuantityDropdown({ onChange, optionItems }) {
+export default function QuantityDropdown({
+  onChange,
+  optionItems,
+  defaultValue,
+}) {
+  console.log(defaultValue);
   return (
-    <select onChange={onChange}>
+    <select onChange={onChange} value={defaultValue}>
       {[...Array(optionItems).keys()].map((x) => (
         <option key={x + 1} value={x + 1}>
           {x + 1}

@@ -1,9 +1,11 @@
 import React from "react";
 import QuantityDropdown from "./QuantityDropdown";
-import { addToCart } from "../redux/customActions/productActions";
+import {
+  addToCart,
+  deleteFromCart,
+} from "../redux/customActions/productActions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-
 export default function CartItem({ item }) {
   const dispatch = useDispatch();
 
@@ -22,9 +24,10 @@ export default function CartItem({ item }) {
             addToCart(dispatch, item.product, e.target.value);
           }}
           optionItems={item.countInStock}
+          defaultValue={item.qty}
         />
       </div>
-      <div>
+      <div onClick={() => deleteFromCart(dispatch, item.product)}>
         <button>Delete</button>
       </div>
     </div>

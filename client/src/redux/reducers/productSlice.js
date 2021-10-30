@@ -34,9 +34,16 @@ export const counterSlice = createSlice({
       } else {
         state.cartItems = [...state.cartItems, item];
       }
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    setDeleteFromCart: (state, action) => {
+      state.cartItems = state.cartItems.filter((item) => {
+        return item.product !== action.payload;
+      });
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     setDefaultCartItems: (state) => {
-      console.log("here1");
       state.cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     },
   },
@@ -50,6 +57,7 @@ export const {
   setProduct,
   setAddToCart,
   setDefaultCartItems,
+  setDeleteFromCart,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;
