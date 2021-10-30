@@ -5,7 +5,6 @@ export default function QuantityDropdown({
   optionItems,
   defaultValue,
 }) {
-  console.log(defaultValue);
   return (
     <select onChange={onChange} value={defaultValue}>
       {[...Array(optionItems).keys()].map((x) => (

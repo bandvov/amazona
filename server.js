@@ -1,15 +1,16 @@
 const express = require("express");
-const { products } = require("./data ");
 const app = express();
-const PORT = 5000;
 const cors = require("cors");
 const path = require("path");
+const { userRouter, productRouter } = require("./routers");
+const { PORT } = require("./ENV_VARIABLES");
+const { connectToDb } = require("./db");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(cors({ origin: "*" }));
-
+connectToDb();
 // app.use(express.static(path.join(__dirname, "/client/build")));
 // app.use(express.static("public"));
 
@@ -17,20 +18,10 @@ app.use(cors({ origin: "*" }));
 //   res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 // });
 
-app.get("/api/products", (req, res) => {
-  res.json({ products });
-});
-app.get("/api/product/:id", (req, res) => {
-  const { id } = req.params;
-  const product = products.find((product) => {
-    return product._id === id;
-  });
-
-  if (product) {
-    res.json({ product });
-  } else {
-    res.status(404).json({ message: "Product not found" });
-  }
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
+app.use((req, res) => {
+  res.status(404).json({ message: "Page not found" });
 });
 app.listen(PORT, () => {
   console.log("server started on port: %s", PORT);

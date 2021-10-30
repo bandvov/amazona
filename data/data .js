@@ -1,6 +1,21 @@
+const bcrypt = require("bcryptjs");
+
+const users = [
+  {
+    name: "admin",
+    email: "admin@example.com",
+    password: bcrypt.hashSync("1234", 8),
+    isAdmin: true,
+  },
+  {
+    name: "aaada",
+    email: "aaaa@example.com",
+    password: bcrypt.hashSync("1234", 8),
+    isAdmin: true,
+  },
+];
 const products = [
   {
-    _id: "1",
     name: "asd as ds",
     category: "shirt",
     brand: "Nike",
@@ -12,7 +27,6 @@ const products = [
     countInStock: 0,
   },
   {
-    _id: "2",
     name: " cvb vbasd as ds",
     category: "shirt",
     brand: "Puma",
@@ -24,7 +38,6 @@ const products = [
     countInStock: 2,
   },
   {
-    _id: "3",
     name: "bata tat ta",
     category: "shirt",
     brand: "Briony",
@@ -36,7 +49,6 @@ const products = [
     countInStock: 12,
   },
   {
-    _id: "4",
     name: "bata tat ta",
     category: "shirt",
     brand: "Briony",
@@ -48,7 +60,6 @@ const products = [
     countInStock: 26,
   },
   {
-    _id: "5",
     name: "bata tat ta",
     category: "shirt",
     brand: "Briony",
@@ -61,4 +72,4 @@ const products = [
   },
 ];
 
-module.exports = { products };
+module.exports = { products, users };

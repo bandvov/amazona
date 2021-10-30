@@ -28,7 +28,7 @@ export const getProduct = (dispatch, id) => {
   dispatch(setLoading(true));
   dispatch(setError(false));
   axios
-    .get(`http://localhost:5000/api/product/${id}`)
+    .get(`http://localhost:5000/api/products/${id}`)
     .then((res) => {
       dispatch(setProduct(res.data.product));
     })
@@ -39,18 +39,20 @@ export const getProduct = (dispatch, id) => {
 };
 
 export const addToCart = (dispatch, id, quontity) => {
-  axios.get(`http://localhost:5000/api/product/${id}`).then((res) => {
-    const { _id, name, price, countInStock, image } = res.data.product;
-    const itemToAdd = {
-      product: _id,
-      name,
-      price,
-      countInStock,
-      qty: quontity,
-      image,
-    };
-    dispatch(setAddToCart(itemToAdd));
-  });
+  axios
+    .get(`http://localhost:5000/api/products/${id}`)
+    .then((res) => {
+      const { _id, name, price, countInStock, image } = res.data.product;
+      const itemToAdd = {
+        product: _id,
+        name,
+        price,
+        countInStock,
+        qty: quontity,
+        image,
+      };
+      dispatch(setAddToCart(itemToAdd));
+    });
 };
 
 export const initCartItems = (dispatch) => {
