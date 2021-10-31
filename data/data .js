@@ -1,16 +1,16 @@
-const bcrypt = require("bcryptjs");
+const sha256 = require("sha256");
 
 const users = [
   {
     name: "admin",
     email: "admin@example.com",
-    password: bcrypt.hashSync("1234", 8),
+    password: sha256("1234"),
     isAdmin: true,
   },
   {
     name: "aaada",
     email: "aaaa@example.com",
-    password: bcrypt.hashSync("1234", 8),
+    password: sha256("1234"),
     isAdmin: true,
   },
 ];
