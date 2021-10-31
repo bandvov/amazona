@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/reducers/userSlice";
 
 export default function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
-
+  const ref = useRef(null);
   const cartItems = useSelector((state) => state.product.cartItems);
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -14,6 +14,11 @@ export default function Header() {
     localStorage.removeItem("user");
     dispatch(setUser(null));
   };
+  document.addEventListener("click", (e) => {
+    if (ref.current !== e.target) {
+      setShowDropdown(false);
+    }
+  });
   return (
     <header>
       <div className="row">
@@ -30,9 +35,32 @@ export default function Header() {
             )}
           </div>
           {user ? (
-            <div style={{ color: "white" }} onClick={signOutHandler}>
-              {user?.name}
-            </div>
+            <>
+              <div
+                style={{ color: "white", position: "relative" }}
+                onMouseOver={() => setShowDropdown(true)}
+              >
+                {user?.name}
+                &#9660;
+              </div>
+              {showDropdown && (
+                <div
+                  ref={ref}
+                  style={{
+                    position: "absolute",
+                    padding: "1rem",
+                    backgroundColor: "#203040",
+                    color: "white",
+                    right: 0,
+                    top: "5rem",
+                  }}
+                >
+                  <Link onClick={signOutHandler} to="#">
+                    Sign Out
+                  </Link>
+                </div>
+              )}
+            </>
           ) : (
             <Link to="/signin">Signin</Link>
           )}

@@ -2,38 +2,53 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MessageBox from "../components/MessageBox";
-import { signinUser } from "../redux/customActions/productActions";
+import { registerUser } from "../redux/customActions/productActions";
 import { setUserErrorMessage } from "../redux/reducers/userSlice";
 
-export default function SigninScreen() {
+export default function RegisterScreen() {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(setUserErrorMessage(""));
   }, []);
+
   const error = useSelector((state) => state.user.errorMessage);
   const loading = useSelector((state) => state.user.loading);
   const submitHandler = (e) => {
     e.preventDefault();
-    signinUser(dispatch, { email, password });
+    registerUser(dispatch, { email, password, name });
   };
   return (
     <div>
       {loading && <div>loading...</div>}
       <form className="form" onSubmit={submitHandler}>
         <div>
-          <h2>Sign In</h2>
+          <h2>Create Account</h2>
         </div>
         {error && <MessageBox variant="danger">{error}</MessageBox>}
+        <div>
+          <label htmlFor="email">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="name"
+            value={name}
+            placeholder="Enter name..."
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
         <div>
           <label htmlFor="email">Email</label>
           <input
             id="email"
             name="email"
             type="email"
+            value={email}
             placeholder="Enter email..."
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -43,6 +58,7 @@ export default function SigninScreen() {
           <input
             id="password"
             name="password"
+            value={password}
             type={showPassword ? "text" : "password"}
             placeholder="Enter password..."
             onChange={(e) => setPassword(e.target.value)}
@@ -62,12 +78,12 @@ export default function SigninScreen() {
         </div>
         <div>
           <button className="primary block" type="submit">
-            Sign In
+            Create Account
           </button>
         </div>
         <div>
           <div>
-            Don't have account? <Link to="/register">Create Account</Link>
+            Already have account? <Link to="/signin">Sign In</Link>
           </div>
         </div>
       </form>

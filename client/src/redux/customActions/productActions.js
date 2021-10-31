@@ -79,3 +79,17 @@ export const signinUser = (dispatch, data) => {
     })
     .finally(() => dispatch(setUserLoading(false)));
 };
+export const registerUser = (dispatch, data) => {
+  dispatch(setUserLoading(true));
+  dispatch(setUserErrorMessage(""));
+  axios
+    .post("http://localhost:5000/api/users/register", data)
+    .then((response) => {
+      dispatch(setUser(response.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
+    })
+    .catch((err) => {
+      dispatch(setUserErrorMessage(err.message));
+    })
+    .finally(() => dispatch(setUserLoading(false)));
+};
