@@ -1,3 +1,4 @@
+import axios from "axios";
 import {
   setProduct,
   setError,
@@ -7,7 +8,11 @@ import {
   setDefaultCartItems,
   setDeleteFromCart,
 } from "../reducers/productSlice";
-import axios from "axios";
+import {
+  setUser,
+  setUserLoading,
+  setUserErrorMessage,
+} from "../reducers/userSlice";
 
 export const getProducts = (dispatch) => {
   dispatch(setLoading(true));
@@ -39,20 +44,18 @@ export const getProduct = (dispatch, id) => {
 };
 
 export const addToCart = (dispatch, id, quontity) => {
-  axios
-    .get(`http://localhost:5000/api/products/${id}`)
-    .then((res) => {
-      const { _id, name, price, countInStock, image } = res.data.product;
-      const itemToAdd = {
-        product: _id,
-        name,
-        price,
-        countInStock,
-        qty: quontity,
-        image,
-      };
-      dispatch(setAddToCart(itemToAdd));
-    });
+  axios.get(`http://localhost:5000/api/products/${id}`).then((res) => {
+    const { _id, name, price, countInStock, image } = res.data.product;
+    const itemToAdd = {
+      product: _id,
+      name,
+      price,
+      countInStock,
+      qty: quontity,
+      image,
+    };
+    dispatch(setAddToCart(itemToAdd));
+  });
 };
 
 export const initCartItems = (dispatch) => {
@@ -60,4 +63,19 @@ export const initCartItems = (dispatch) => {
 };
 export const deleteFromCart = (dispatch, id) => {
   dispatch(setDeleteFromCart(id));
+};
+
+export const signinUser = (dispatch, data) => {
+  dispatch(setUserLoading(true));
+  dispatch(setUserErrorMessage(""));
+  axios
+    .post("http://localhost:5000/api/users/signin", data)
+    .then((response) => {
+      dispatch(setUser(response.data));
+      localStorage.setItem("user", JSON.stringify(response.data));
+    })
+    .catch((err) => {
+      dispatch(setUserErrorMessage(err.message));
+    })
+    .finally(() => dispatch(setUserLoading(false)));
 };

@@ -9,9 +9,9 @@ const users = [
   },
   {
     name: "aaada",
-    email: "aaaa@example.com",
-    password: sha256("1234"),
-    isAdmin: true,
+    email: "test@gmail.com",
+    password: sha256("123456"),
+    isAdmin: false,
   },
 ];
 const products = [

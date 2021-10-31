@@ -1,2 +1,4 @@
+import userReducer from "./userSlice";
 import productReducer from "./productSlice";
-export { productReducer };
+
+export { productReducer, userReducer };

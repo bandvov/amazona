@@ -184,10 +184,13 @@ li {
     margin: 0 auto;
 }
 .form > div {
+    position: relative;
     display: flex;
     flex-direction: column;
     margin: 1rem;
+    width: auto;
 }
+
 .form input {
     margin-top: 1rem;
     margin-bottom: 1rem;
