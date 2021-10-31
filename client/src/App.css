@@ -172,3 +172,36 @@ li {
     max-width: 30rem;
     width: 100%;
 }
+/* form */
+.form {
+    border: 1px solid;
+    margin: 0 auto;
+    max-width: 50rem;
+    width: 100%;
+    border-radius: 5px;
+}
+.form h2 {
+    margin: 0 auto;
+}
+.form > div {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+}
+.form input {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.error-page {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    width: 22rem;
+}
+.error-page h1{
+    margin: 0;
+font-size: 10rem;
+}
