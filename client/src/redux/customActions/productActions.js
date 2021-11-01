@@ -7,6 +7,7 @@ import {
   setAddToCart,
   setDefaultCartItems,
   setDeleteFromCart,
+  setShippingAddress,
 } from "../reducers/productSlice";
 import {
   setUser,
@@ -58,9 +59,6 @@ export const addToCart = (dispatch, id, quontity) => {
   });
 };
 
-export const initCartItems = (dispatch) => {
-  dispatch(setDefaultCartItems());
-};
 export const deleteFromCart = (dispatch, id) => {
   dispatch(setDeleteFromCart(id));
 };
@@ -92,4 +90,8 @@ export const registerUser = (dispatch, data) => {
       dispatch(setUserErrorMessage(err.message));
     })
     .finally(() => dispatch(setUserLoading(false)));
+};
+export const saveShippingAddress = (dispatch, data) => {
+  dispatch(setShippingAddress(data));
+  localStorage.setItem("shippingAddress", JSON.stringify(data));
 };

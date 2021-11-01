@@ -206,5 +206,19 @@ li {
 }
 .error-page h1{
     margin: 0;
-font-size: 10rem;
+    font-size: 10rem;
+}
+
+.checkout-steps {
+    margin-bottom: 1rem;
+}
+.checkout-steps > div {
+    border-top: .3rem solid #c0c0c0;
+    color: #c0c0c0;
+    flex: 1;
+    padding: 1rem;
+}
+.checkout-steps > div.active {
+    border-top-color: rgb(0, 184, 0);
+    color: rgb(0, 165, 0);
 }

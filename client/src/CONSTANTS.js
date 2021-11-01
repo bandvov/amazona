@@ -4,6 +4,7 @@ import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
 import PageNotFoundScreen from "./screens/PageNotFoundScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import ShippingAddresstScreen from "./screens/ShippingAddresstScreen";
 
 export const ROUTES = [
   { path: "/", exact: true, component: Homescreen },
@@ -12,5 +13,6 @@ export const ROUTES = [
   { path: "/product/:id", exact: true, component: ProductScreen },
   { path: "/signin", exact: true, component: SigninScreen },
   { path: "/register", exact: true, component: RegisterScreen },
+  { path: "/shipping", exact: true, component: ShippingAddresstScreen },
   { path: "/404", exact: true, component: PageNotFoundScreen },
 ];

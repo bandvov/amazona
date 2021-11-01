@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import MessageBox from "../components/MessageBox";
 import { signinUser } from "../redux/customActions/productActions";
 import { setUserErrorMessage } from "../redux/reducers/userSlice";
 
-export default function SigninScreen() {
+export default function SigninScreen({ history, location }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const redirect = location.search.split("=")[1];
 
   const dispatch = useDispatch();
   useEffect(() => {
@@ -16,6 +18,16 @@ export default function SigninScreen() {
   }, []);
   const error = useSelector((state) => state.user.errorMessage);
   const loading = useSelector((state) => state.user.loading);
+  const user = useSelector((state) => state.user.user);
+
+  useEffect(() => {
+    console.log("here");
+    if (redirect && user) {
+      console.log("here1");
+      history.push("/" + redirect);
+    }
+  }, [redirect, user, history]);
+
   const submitHandler = (e) => {
     e.preventDefault();
     signinUser(dispatch, { email, password });

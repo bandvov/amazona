@@ -37,7 +37,11 @@ export default function Header() {
           {user ? (
             <>
               <div
-                style={{ color: "white", position: "relative" }}
+                style={{
+                  color: "white",
+                  position: "relative",
+                  marginRight: "1rem",
+                }}
                 onMouseOver={() => setShowDropdown(true)}
               >
                 {user?.name}
