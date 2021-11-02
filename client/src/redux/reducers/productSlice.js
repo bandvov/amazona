@@ -7,8 +7,9 @@ export const counterSlice = createSlice({
     product: {},
     loading: true,
     error: false,
-    cartItems: JSON.parse(localStorage) || [],
+    cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
     shippingAddress: JSON.parse(localStorage.getItem("shippingAddress")) || {},
+    paymentMethod: "paypal",
   },
   reducers: {
     setProducts: (state, action) => {
@@ -44,9 +45,12 @@ export const counterSlice = createSlice({
 
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
- 
+
     setShippingAddress: (state, action) => {
       state.shippingAddress = action.payload;
+    },
+    setPaymentMethod: (state, action) => {
+      state.paymentMethod = action.payload;
     },
   },
 });
@@ -61,6 +65,7 @@ export const {
   setDefaultCartItems,
   setDeleteFromCart,
   setShippingAddress,
+  setPaymentMethod,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

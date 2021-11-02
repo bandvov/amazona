@@ -20,17 +20,14 @@ export default function SigninScreen({ history, location }) {
   const loading = useSelector((state) => state.user.loading);
   const user = useSelector((state) => state.user.user);
 
-  useEffect(() => {
-    console.log("here");
-    if (redirect && user) {
-      console.log("here1");
-      history.push("/" + redirect);
-    }
-  }, [redirect, user, history]);
+  if (user.name) {
+    redirect ? history.push("/" + redirect) : history.push("/");
+  }
 
   const submitHandler = (e) => {
     e.preventDefault();
     signinUser(dispatch, { email, password });
+    history.push("/" + redirect);
   };
   return (
     <div>

@@ -12,7 +12,7 @@ export default function Header() {
 
   const signOutHandler = () => {
     localStorage.removeItem("user");
-    dispatch(setUser(null));
+    dispatch(setUser({}));
   };
   document.addEventListener("click", (e) => {
     if (ref.current !== e.target) {
@@ -34,7 +34,7 @@ export default function Header() {
               </span>
             )}
           </div>
-          {user ? (
+          {user.email ? (
             <>
               <div
                 style={{

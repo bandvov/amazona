@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../redux/customActions/productActions";
 
-const shippingAddress = JSON.parse(localStorage.getItem("shippingAddress"));
-
 export default function ShippingAddresstScreen({ history }) {
   const shippingAddress = useSelector((state) => state.product.shippingAddress);
   const [fullName, setFullName] = useState(shippingAddress.fullName);
@@ -13,9 +11,8 @@ export default function ShippingAddresstScreen({ history }) {
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
 
   const user = useSelector((state) => state.user.user);
-  console.log(fullName, address);
   const dispatch = useDispatch();
-  if (!user) {
+  if (!user.email) {
     history.push("/signin");
   }
 
