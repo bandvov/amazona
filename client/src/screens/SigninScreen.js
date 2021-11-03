@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import MessageBox from "../components/MessageBox";
 import { signinUser } from "../redux/customActions/productActions";
 import { setUserErrorMessage } from "../redux/reducers/userSlice";
@@ -27,7 +27,7 @@ export default function SigninScreen({ history, location }) {
   const submitHandler = (e) => {
     e.preventDefault();
     signinUser(dispatch, { email, password });
-    history.push("/" + redirect);
+    history.push("/");
   };
   return (
     <div>

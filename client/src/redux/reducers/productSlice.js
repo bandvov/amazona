@@ -51,6 +51,7 @@ export const counterSlice = createSlice({
     },
     setPaymentMethod: (state, action) => {
       state.paymentMethod = action.payload;
+      localStorage.setItem("paymentMethod", JSON.stringify(action.payload));
     },
   },
 });

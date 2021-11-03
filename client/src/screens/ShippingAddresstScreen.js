@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../redux/customActions/productActions";
@@ -9,6 +9,7 @@ export default function ShippingAddresstScreen({ history }) {
   const [address, setAddress] = useState(shippingAddress.address);
   const [country, setCountry] = useState(shippingAddress.country);
   const [postalCode, setPostalCode] = useState(shippingAddress.postalCode);
+  const [city, setCity] = useState(shippingAddress.city);
 
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
@@ -17,7 +18,13 @@ export default function ShippingAddresstScreen({ history }) {
   }
 
   const submitHandler = () => {
-    saveShippingAddress(dispatch, { fullName, address, country, postalCode });
+    saveShippingAddress(dispatch, {
+      fullName,
+      address,
+      country,
+      postalCode,
+      city,
+    });
     history.push("/payment");
   };
   return (
@@ -47,6 +54,17 @@ export default function ShippingAddresstScreen({ history }) {
             value={address}
             placeholder="Enter address..."
             onChange={(e) => setAddress(e.target.value)}
+          />
+        </div>
+        <div>
+          <label htmlFor="city">City</label>
+          <input
+            id="city"
+            name="city"
+            type="text"
+            value={city}
+            placeholder="Enter city..."
+            onChange={(e) => setCity(e.target.value)}
           />
         </div>
         <div>
