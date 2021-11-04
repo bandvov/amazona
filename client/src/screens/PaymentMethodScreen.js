@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import CheckoutSteps from "../components/CheckoutSteps";
 import { useSelector, useDispatch } from "react-redux";
-import { setPaymentMethod as setPaymentMethodToStore } from "../redux/reducers/productSlice";
+import { setPaymentMethod as setPaymentMethodToStore } from "../redux/reducers/cartSlice";
 
 export default function PaymentMethodScreen({ history }) {
-  const payMethod = useSelector((state) => state.product.paymentMethod);
+  const payMethod = useSelector((state) => state.cart.paymentMethod);
   const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = useState(payMethod);
   const submitHandler = (e) => {

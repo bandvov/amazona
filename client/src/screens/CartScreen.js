@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/customActions/productActions";
 import MessageBox from "./../components/MessageBox";
@@ -9,7 +9,7 @@ export default function CartScreen({ match, history, location }) {
   const qty = location.search.split("=")[1] || 1;
   const productId = match.params.id;
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.product.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
     addToCart(dispatch, productId, qty);

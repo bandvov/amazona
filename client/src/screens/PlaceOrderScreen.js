@@ -5,10 +5,10 @@ import OrderCartItem from "../components/OrderCartItem";
 
 export default function PlaceOrderScreen({ history }) {
   const { fullName, address, country, city, postalCode } = useSelector(
-    (state) => state.product.shippingAddress
+    (state) => state.cart.shippingAddress
   );
-  const paymentMethod = useSelector((state) => state.product.paymentMethod);
-  const cartItems = useSelector((state) => state.product.cartItems);
+  const paymentMethod = useSelector((state) => state.cart.paymentMethod);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   if (!paymentMethod) {
     history.push("/payment");
   }

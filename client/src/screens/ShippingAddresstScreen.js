@@ -4,7 +4,7 @@ import CheckoutSteps from "../components/CheckoutSteps";
 import { saveShippingAddress } from "../redux/customActions/productActions";
 
 export default function ShippingAddresstScreen({ history }) {
-  const shippingAddress = useSelector((state) => state.product.shippingAddress);
+  const shippingAddress = useSelector((state) => state.cart.shippingAddress);
   const [fullName, setFullName] = useState(shippingAddress.fullName);
   const [address, setAddress] = useState(shippingAddress.address);
   const [country, setCountry] = useState(shippingAddress.country);

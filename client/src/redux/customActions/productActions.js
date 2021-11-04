@@ -1,13 +1,14 @@
 import axios from "axios";
 import {
+  setAddToCart,
+  setDeleteFromCart,
+  setShippingAddress,
+} from "../reducers/cartSlice";
+import {
   setProduct,
   setError,
   setLoading,
   setProducts,
-  setAddToCart,
-  setDefaultCartItems,
-  setDeleteFromCart,
-  setShippingAddress,
 } from "../reducers/productSlice";
 import {
   setUser,

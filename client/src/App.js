@@ -6,7 +6,7 @@ import Routes from "./routes";
 import { useSelector } from "react-redux";
 
 export default function App() {
-  const cartItems = useSelector((state) => state.product.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../redux/reducers/userSlice";
@@ -6,7 +6,7 @@ import { setUser } from "../redux/reducers/userSlice";
 export default function Header() {
   const [showDropdown, setShowDropdown] = useState(false);
   const ref = useRef(null);
-  const cartItems = useSelector((state) => state.product.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
 

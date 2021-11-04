@@ -1,15 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const counterSlice = createSlice({
+ const counterSlice = createSlice({
   name: "products",
   initialState: {
     products: [],
     product: {},
     loading: true,
     error: false,
-    cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
-    shippingAddress: JSON.parse(localStorage.getItem("shippingAddress")) || {},
-    paymentMethod: "paypal",
   },
   reducers: {
     setProducts: (state, action) => {
@@ -24,35 +21,7 @@ export const counterSlice = createSlice({
     setProduct: (state, action) => {
       state.product = action.payload;
     },
-    setAddToCart: (state, action) => {
-      const item = action.payload;
-      const existInCartItems = state.cartItems.find(
-        (x) => x.product === item.product
-      );
-      if (existInCartItems) {
-        state.cartItems = state.cartItems.map((x) => {
-          return x.product === item.product ? item : x;
-        });
-      } else {
-        state.cartItems = [...state.cartItems, item];
-      }
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-    },
-    setDeleteFromCart: (state, action) => {
-      state.cartItems = state.cartItems.filter((item) => {
-        return item.product !== action.payload;
-      });
-
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-    },
-
-    setShippingAddress: (state, action) => {
-      state.shippingAddress = action.payload;
-    },
-    setPaymentMethod: (state, action) => {
-      state.paymentMethod = action.payload;
-      localStorage.setItem("paymentMethod", JSON.stringify(action.payload));
-    },
+  
   },
 });
 
@@ -62,11 +31,6 @@ export const {
   setLoading,
   setError,
   setProduct,
-  setAddToCart,
-  setDefaultCartItems,
-  setDeleteFromCart,
-  setShippingAddress,
-  setPaymentMethod,
 } = counterSlice.actions;
 
 export default counterSlice.reducer;

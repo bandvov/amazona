@@ -27,7 +27,7 @@ export default function SigninScreen({ history, location }) {
   const submitHandler = (e) => {
     e.preventDefault();
     signinUser(dispatch, { email, password });
-    history.push("/");
+    history.push("/payment");
   };
   return (
     <div>
