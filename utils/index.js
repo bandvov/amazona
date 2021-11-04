@@ -4,4 +4,21 @@ const jwt = require("jsonwebtoken");
 const generateToken = async (data) => {
   return await jwt.sign(data, JWT_SECRET, { expiresIn: "7d" });
 };
-module.exports = { generateToken };
+
+const isAuth = (req, res, next) => {
+  const authorization = req.headers.authorization;
+  const token = authorization.slice(7);
+  if (authorization) {
+    jwt.verify(token, JWT_SECRET, (err, decoded) => {
+      if (err) {
+        res.status(401).json({ message: "Token in not provided" });
+      } else {
+        req.user = decoded;
+        next();
+      }
+    });
+  } else {
+    res.json({ message: "No token" });
+  }
+};
+module.exports = { generateToken, isAuth };

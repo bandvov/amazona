@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const path = require("path");
-const { userRouter, productRouter } = require("./routers");
+const { userRouter, productRouter, orderRouter } = require("./routers");
 const { PORT } = require("./ENV_VARIABLES");
 const { connectToDb } = require("./db");
 
@@ -20,6 +20,7 @@ connectToDb();
 
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
+app.use("/api/order", orderRouter);
 app.use((req, res) => {
   res.status(404).json({ message: "Page not found" });
 });
