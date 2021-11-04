@@ -1,9 +1,6 @@
 import React from "react";
 import QuantityDropdown from "./QuantityDropdown";
-import {
-  addToCart,
-  deleteFromCart,
-} from "../redux/customActions/productActions";
+import { addToCart, deleteFromCart } from "../redux/customActions/cartActions";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 export default function CartItem({ item }) {

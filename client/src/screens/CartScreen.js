@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../redux/customActions/productActions";
+import { addToCart } from "../redux/customActions/cartActions";
 import MessageBox from "./../components/MessageBox";
 import { Link } from "react-router-dom";
 import CartItem from "../components/CartItem";
