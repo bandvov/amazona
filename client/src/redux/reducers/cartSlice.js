@@ -1,13 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 
- const cartSlice = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState: {
+    loading: false,
+    error: "",
     cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
     shippingAddress: JSON.parse(localStorage.getItem("shippingAddress")) || {},
     paymentMethod: "paypal",
   },
   reducers: {
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
+    },
     setAddToCart: (state, action) => {
       const item = action.payload;
       const existInCartItems = state.cartItems.find(
@@ -41,18 +49,20 @@ import { createSlice } from "@reduxjs/toolkit";
 });
 const {
   setAddToCart,
-  setDefaultCartItems,
   setDeleteFromCart,
   setShippingAddress,
   setPaymentMethod,
+  setError,
+  setLoading,
 } = cartSlice.actions;
 
 export {
   setAddToCart,
-  setDefaultCartItems,
   setDeleteFromCart,
   setShippingAddress,
   setPaymentMethod,
+  setError,
+  setLoading,
 };
 
 export default cartSlice.reducer;

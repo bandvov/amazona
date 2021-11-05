@@ -1,22 +1,35 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import CheckoutSteps from "./../components/CheckoutSteps";
 import OrderCartItem from "../components/OrderCartItem";
+import { createOrder } from "./../redux/customActions/cartActions";
 
 export default function PlaceOrderScreen({ history }) {
-  const { fullName, address, country, city, postalCode } = useSelector(
-    (state) => state.cart.shippingAddress
-  );
+  const shippingAddress = useSelector((state) => state.cart.shippingAddress);
   const paymentMethod = useSelector((state) => state.cart.paymentMethod);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
+
   if (!paymentMethod) {
     history.push("/payment");
   }
   const toPrice = (num) => +num.toFixed(2);
   const itemsPrice = cartItems.reduce((a, c) => a + c.qty * c.price, 0);
-  const shipingPrice = itemsPrice > 100 ? toPrice(0) : toPrice(10);
+  const shippingPrice = itemsPrice > 100 ? toPrice(0) : toPrice(10);
   const taxPrice = toPrice(0.15 * itemsPrice);
-  const totalPrice = itemsPrice + shipingPrice + taxPrice;
+  const totalPrice = itemsPrice + shippingPrice + taxPrice;
+
+  const OrderHandler = () => {
+    createOrder(dispatch, {
+      shippingAddress,
+      paymentMethod,
+      orderItems: cartItems,
+      itemsPrice,
+      shippingPrice,
+      taxPrice,
+      totalPrice,
+    });
+  };
   return (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />
@@ -27,11 +40,11 @@ export default function PlaceOrderScreen({ history }) {
               <div className="card card-body">
                 <h2>Shipping</h2>
                 <p>
-                  <strong>Name:</strong> {fullName}
+                  <strong>Name:</strong> {shippingAddress.fullName}
                 </p>
                 <p>
                   <strong>Address:</strong>{" "}
-                  {`${address}, ${city}, ${country}, ${postalCode}`}
+                  {`${shippingAddress.address}, ${shippingAddress.city}, ${shippingAddress.country}, ${shippingAddress.postalCode}`}
                 </p>
               </div>
             </li>
@@ -50,7 +63,7 @@ export default function PlaceOrderScreen({ history }) {
                   {cartItems.map((item) => {
                     return (
                       <li key={item.product}>
-                        <OrderCartItem item={item} />;
+                        <OrderCartItem item={item} />
                       </li>
                     );
                   })}
@@ -74,7 +87,7 @@ export default function PlaceOrderScreen({ history }) {
               <li>
                 <div className="row">
                   <strong>Shipping:</strong>
-                  <div>$ {shipingPrice.toFixed(2)}</div>
+                  <div>$ {shippingPrice.toFixed(2)}</div>
                 </div>
               </li>
               <li>
@@ -90,7 +103,9 @@ export default function PlaceOrderScreen({ history }) {
                 </div>
               </li>
               <li>
-                <button className="primary block">Place Order</button>
+                <button onClick={OrderHandler} className="primary block">
+                  Place Order
+                </button>
               </li>
             </ul>
           </div>

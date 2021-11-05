@@ -1,9 +1,5 @@
 import axios from "axios";
-import {
-  setAddToCart,
-  setDeleteFromCart,
-  setShippingAddress,
-} from "../reducers/cartSlice";
+
 import {
   setProduct,
   setError,
@@ -73,8 +69,4 @@ export const registerUser = (dispatch, data) => {
       dispatch(setUserErrorMessage(err.message));
     })
     .finally(() => dispatch(setUserLoading(false)));
-};
-export const saveShippingAddress = (dispatch, data) => {
-  dispatch(setShippingAddress(data));
-  localStorage.setItem("shippingAddress", JSON.stringify(data));
 };

@@ -6,6 +6,7 @@ const generateToken = async (data) => {
 };
 
 const isAuth = (req, res, next) => {
+  console.log(req.headers);
   const authorization = req.headers.authorization;
   const token = authorization.slice(7);
   if (authorization) {

@@ -1,5 +1,11 @@
 import axios from "axios";
-import { setAddToCart, setDeleteFromCart } from "../reducers/cartSlice";
+import {
+  setAddToCart,
+  setDeleteFromCart,
+  setShippingAddress,
+  setError,
+  setLoading,
+} from "../reducers/cartSlice";
 
 export const addToCart = (dispatch, id, quontity) => {
   axios.get(`http://localhost:5000/api/products/${id}`).then((res) => {
@@ -18,4 +24,26 @@ export const addToCart = (dispatch, id, quontity) => {
 
 export const deleteFromCart = (dispatch, id) => {
   dispatch(setDeleteFromCart(id));
+};
+
+export const createOrder = (dispatch, order) => {
+  dispatch(setLoading(true));
+  axios.post(
+    "http://localhost:5000/api/order/create",
+    {
+      ...order,
+    },
+    {
+      headers: {
+        Authorization: `Bearer ${
+          JSON.parse(localStorage.getItem("user")).token
+        }`,
+      },
+    }
+  );
+  dispatch(setLoading(false));
+};
+export const saveShippingAddress = (dispatch, data) => {
+  dispatch(setShippingAddress(data));
+  localStorage.setItem("shippingAddress", JSON.stringify(data));
 };

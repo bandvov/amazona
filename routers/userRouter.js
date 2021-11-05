@@ -27,7 +27,7 @@ userRouter.post("/signin", async (req, res) => {
           name: user.name,
           email: user.email,
           isAdmin: user.isAdmin,
-          token: await generateToken({ email: user.email }),
+          token: await generateToken({ email: user.email, userId: user._id }),
         });
         return;
       } else {
