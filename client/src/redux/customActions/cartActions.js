@@ -5,6 +5,7 @@ import {
   setShippingAddress,
   setError,
   setLoading,
+  setorderSuccessfullyCreated,
 } from "../reducers/cartSlice";
 
 export const addToCart = (dispatch, id, quontity) => {
@@ -28,19 +29,26 @@ export const deleteFromCart = (dispatch, id) => {
 
 export const createOrder = (dispatch, order) => {
   dispatch(setLoading(true));
-  axios.post(
-    "http://localhost:5000/api/order/create",
-    {
-      ...order,
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${
-          JSON.parse(localStorage.getItem("user")).token
-        }`,
+  axios
+    .post(
+      "http://localhost:5000/api/order/create",
+      {
+        ...order,
       },
-    }
-  );
+      {
+        headers: {
+          Authorization: `Bearer ${
+            JSON.parse(localStorage.getItem("user")).token
+          }`,
+        },
+      }
+    )
+    .then(() => {
+      dispatch(setorderSuccessfullyCreated(true));
+    })
+    .catch((err) => {
+      dispatch(setError("Something went wrong! Please reload and try again"));
+    });
   dispatch(setLoading(false));
 };
 export const saveShippingAddress = (dispatch, data) => {

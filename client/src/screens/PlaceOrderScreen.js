@@ -3,11 +3,17 @@ import { useSelector, useDispatch } from "react-redux";
 import CheckoutSteps from "./../components/CheckoutSteps";
 import OrderCartItem from "../components/OrderCartItem";
 import { createOrder } from "./../redux/customActions/cartActions";
+import { Link } from "react-router-dom";
+import MessageBox from "./../components/MessageBox";
 
 export default function PlaceOrderScreen({ history }) {
   const shippingAddress = useSelector((state) => state.cart.shippingAddress);
   const paymentMethod = useSelector((state) => state.cart.paymentMethod);
   const cartItems = useSelector((state) => state.cart.cartItems);
+  const orderSuccessfullyCreated = useSelector(
+    (state) => state.cart.orderSuccessfullyCreated
+  );
+  const error = useSelector((state) => state.cart.error);
   const dispatch = useDispatch();
 
   if (!paymentMethod) {
@@ -30,9 +36,15 @@ export default function PlaceOrderScreen({ history }) {
       totalPrice,
     });
   };
-  return (
+  return orderSuccessfullyCreated ? (
+    <div>
+      <h1>Order successfully created!</h1>
+      <Link to="/">Continue Shopping</Link>
+    </div>
+  ) : (
     <div>
       <CheckoutSteps step1 step2 step3 step4 />
+      {error && <MessageBox variant="danger">{error}</MessageBox>}
       <div className="row top">
         <div className="col-2">
           <ul>
