@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function OrderCartItem({ item }) {
+
   return (
     <div className="row" style={{ borderBottom: "1px solid" }}>
       <div>
@@ -11,7 +12,7 @@ export default function OrderCartItem({ item }) {
         <Link to={`/product/${item.product}`}>{item.name}</Link>
       </div>
       <div>
-        {item.qty} x $ {item.price} = $ {item.qty * item.price}
+        {item?.qty} x $ {item.price} = $ {item.qty * item.price}
       </div>
     </div>
   );

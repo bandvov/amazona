@@ -21,6 +21,10 @@ const orderSchema = mongoose.Schema(
           required: true,
           ref: "Product",
         },
+        price: {
+          type: Number,
+          required: true,
+        },
       },
     ],
     shippingAddress: {
@@ -76,6 +80,7 @@ const orderSchema = mongoose.Schema(
     },
     paidAt: {
       type: Date,
+      default: "",
     },
     isDelivered: {
       type: Boolean,
@@ -83,6 +88,7 @@ const orderSchema = mongoose.Schema(
     },
     deliveredAt: {
       type: Date,
+      default: "",
     },
   },
   { timestamps: true }

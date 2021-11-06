@@ -5,7 +5,7 @@ import {
   setShippingAddress,
   setError,
   setLoading,
-  setorderSuccessfullyCreated,
+  addCreatedOrderToSTore,
 } from "../reducers/cartSlice";
 
 export const addToCart = (dispatch, id, quontity) => {
@@ -43,8 +43,8 @@ export const createOrder = (dispatch, order) => {
         },
       }
     )
-    .then(() => {
-      dispatch(setorderSuccessfullyCreated(true));
+    .then((res) => {
+      dispatch(addCreatedOrderToSTore(res.data.order));
     })
     .catch((err) => {
       dispatch(setError("Something went wrong! Please reload and try again"));

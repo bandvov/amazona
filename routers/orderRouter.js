@@ -4,6 +4,7 @@ const { isAuth } = require("../utils");
 const orderRouter = express.Router();
 
 orderRouter.post("/create", isAuth, async (req, res) => {
+  await Order.remove();
   if (!req.body.orderItems.length) {
     res.status(400).json({ message: "Cart is empty" });
   } else {
@@ -17,6 +18,17 @@ orderRouter.post("/create", isAuth, async (req, res) => {
       console.log(err);
       res.status(500).json({ message: "Internal server error" });
     }
+  }
+});
+orderRouter.get("/:id", async (req, res) => {
+  if (!req.params.id) {
+    res.status(400).json({ message: "Id not provided" });
+  }
+  const order = await Order.findById(req.params.id);
+  if (order) {
+    res.json({ order });
+  } else {
+    res.status(404).json({ message: "Order not found" });
   }
 });
 
