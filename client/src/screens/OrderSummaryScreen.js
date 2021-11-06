@@ -1,6 +1,5 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CheckoutSteps from "../components/CheckoutSteps";
 import OrderCartItem from "../components/OrderCartItem";
 import MessageBox from "../components/MessageBox";
 
@@ -35,7 +34,6 @@ export default function OrderScreen({ history, match }) {
 
   return (
     <div>
-      <CheckoutSteps step1 step2 step3 step4 />
       {error && <MessageBox variant="danger">{error}</MessageBox>}
       <h1>Your Order Id: {match.params.id}</h1>
       <div className="row top">
